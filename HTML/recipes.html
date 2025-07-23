@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Ryu - Asian Recipe Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/recipes.css"> <!-- Link to recipes.css -->
+</head>
+<body>
+    <div class="background-text">RECIPE</div>
+
+    <div id="mainHeader" class="header">
+        <div class="logo" data-translate-key="logo">RECIPE RYU</div>
+        <div class="top-right-nav">
+            <div class="language-selector">
+                <div class="selected-language">
+                    <img src="https://flagcdn.com/w40/us.png" alt="EN" data-lang="en">
+                </div>
+                <ul class="language-options">
+                    <li class="selected"><img src="https://flagcdn.com/w40/us.png" alt="EN" data-lang="en"></li>
+                    <li><img src="https://flagcdn.com/w40/mx.png" alt="ES" data-lang="es"></li>
+                    <li><img src="https://flagcdn.com/w40/pt.png" alt="PT" data-lang="pt"></li>
+                    <li><img src="https://flagcdn.com/w40/cn.png" alt="ZH" data-lang="zh"></li>
+                    <li><img src="https://flagcdn.com/w40/jp.png" alt="JA" data-lang="ja"></li>
+                    <li><img src="https://flagcdn.com/w40/bd.png" alt="BN" data-lang="bn"></li>
+                </ul>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Magnifying_glass_icon.svg" alt="Search" width="20" height="20">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <a href="landing.html" data-translate-key="sidebar-home">HOME</a>
+            <a href="recipes.html" data-translate-key="sidebar-recipes">RECIPES</a>
+            <a href="landing.html#features-section" data-translate-key="sidebar-features">FEATURES</a>
+            <a href="landing.html#reviews-section" data-translate-key="sidebar-user-reviews">USER REVIEWS</a>
+            <a href="landing.html#contact-section" data-translate-key="sidebar-contact">CONTACT</a>
+            <div id="glassHoverBox" class="glass-hover-box"></div>
+        </div>
+        <div class="main-content">
+            <!-- NEW: Category browsing section -->
+            <div id="category-container" class="category-section">
+                <h2 data-translate-key="browse-categories">Browse by Category</h2>
+                <div id="category-buttons" class="category-buttons-grid">
+                    <!-- Category buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="recipe-input-section">
+                <h2 data-translate-key="generate-title">Search by Name / Ingredient</h2>
+                <textarea id="recipeSearchInput" data-translate-key="ingredients-placeholder" placeholder="Enter a recipe name or main ingredient (e.g., Chicken Soup, Salmon)"></textarea>
+                <!-- NEW: Wrapper for buttons -->
+                <div class="button-group">
+                    <button id="generateRecipeBtn" class="generate-button" data-translate-key="generate-button">Find Recipes</button>
+                    <button id="randomRecipeBtn" class="generate-button secondary" data-translate-key="random-button">Random Recipe</button>
+                </div>
+                <div id="loadingIndicator" class="loading-indicator" data-translate-key="loading-text">Searching...</div>
+            </div>
+
+            <div id="recipeOutput" class="recipe-output-section">
+                <!-- Recipe results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="social-links">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/6/6f/Twitter_icon.svg';">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram">
+    </div>
+
+    <div class="custom-scrollbar-track">
+        <div class="custom-scrollbar-thumb"></div>
+    </div>
+
+    <script src="../JS/recipes.js"></script>
+</body>
+</html>

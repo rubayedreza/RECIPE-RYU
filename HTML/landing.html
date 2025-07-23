@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Ryu - Asian Recipe Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/landing.css">
+    
+    <!-- Use Google's <model-viewer> component for robust 3D model display -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+<body>
+    <div class="background-text">RECIPE</div>
+
+    <div id="mainHeader" class="header">
+        <div class="logo" data-translate-key="logo">RECIPE RYU</div>
+        <div class="top-right-nav">
+            <div class="language-selector">
+                <div class="selected-language">
+                    <img src="https://flagcdn.com/w40/us.png" alt="EN" data-lang="en">
+                </div>
+                <ul class="language-options">
+                    <li class="selected"><img src="https://flagcdn.com/w40/us.png" alt="EN" data-lang="en"></li>
+                    <li><img src="https://flagcdn.com/w40/mx.png" alt="ES" data-lang="es"></li>
+                    <li><img src="https://flagcdn.com/w40/pt.png" alt="PT" data-lang="pt"></li>
+                    <li><img src="https://flagcdn.com/w40/cn.png" alt="ZH" data-lang="zh"></li>
+                    <li><img src="https://flagcdn.com/w40/jp.png" alt="JA" data-lang="ja"></li>
+                    <li><img src="https://flagcdn.com/w40/bd.png" alt="BN" data-lang="bn"></li>
+                </ul>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Magnifying_glass_icon.svg" alt="Search" width="20" height="20">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <a href="landing.html" data-translate-key="sidebar-home">HOME</a>
+            <a href="recipes.html" data-translate-key="sidebar-recipes">RECIPES</a>
+            <a href="#features-section" data-translate-key="sidebar-features">FEATURES</a>
+            <a href="#reviews-section" data-translate-key="sidebar-user-reviews">USER REVIEWS</a>
+            <a href="#contact-section" data-translate-key="sidebar-contact">CONTACT</a>
+            <div id="glassHoverBox" class="glass-hover-box"></div>
+        </div>
+        <div class="main-content">
+            <!-- UPDATED: Pointing to the correct .glb file which contains the textures -->
+            <model-viewer id="kitchenModel"
+                          src="../assets/low_poly_kitchen_assets_-_the_sims_4_style-v1.glb"
+                          alt="A 3D model of a kitchen scene"
+                          auto-rotate
+                          camera-controls
+                          disable-gesture-prompt
+                          shadow-intensity="1"
+                          camera-orbit="0deg 75deg 75%"
+                          environment-image="neutral"
+                          exposure="1.5">
+            </model-viewer>
+
+            <div class="dish-description" data-translate-key="dish-description">
+                Recipe Ryu helps you generate authentic Asian recipes based on ingredients you have at home. Get personalized dishes from Japan, Korea, China, Thailand, and more.
+            </div>
+        </div>
+    </div>
+
+    <div class="social-links">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/6/6f/Twitter_icon.svg';">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram">
+    </div>
+
+    <div id="scrollIndicator" class="scroll-indicator"></div>
+
+    <section id="features-section" class="page-section">
+        <h2 data-translate-key="features-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3 data-translate-key="feature-item-1-title">Ingredient-Based Generation</h3>
+                <p data-translate-key="feature-item-1-p">Simply list what you have, and let Recipe Ryu craft delicious Asian dishes tailored to your pantry.</p>
+            </div>
+            <div class="feature-item">
+                <h3 data-translate-key="feature-item-2-title">Diverse Cuisines</h3>
+                <p data-translate-key="feature-item-2-p">Explore authentic recipes from Japan, Korea, China, Thailand, Vietnam, and many more Asian regions.</p>
+            </div>
+            <div class="feature-item">
+                <h3 data-translate-key="feature-item-3-title">Step-by-Step Guidance</h3>
+                <p data-translate-key="feature-item-3-p">Clear, easy-to-follow instructions ensure a smooth cooking experience for every skill level.</p>
+            </div>
+            <div class="feature-item">
+                <h3 data-translate-key="feature-item-4-title">Personalized Suggestions</h3>
+                <p data-translate-key="feature-item-4-p">Our intelligent system learns your preferences to offer even more relevant recipe ideas over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews-section" class="page-section">
+        <h2 data-translate-key="reviews-title">What Our Users Say</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <p data-translate-key="review-1-p">"Recipe Ryu has revolutionized my cooking! I never thought I could make such authentic dishes with what I already had."</p>
+                <span data-translate-key="review-1-span">— Kim L.</span>
+            </div>
+            <div class="review-card">
+                <p data-translate-key="review-2-p">"The variety of recipes is incredible. It's like having a personal Asian chef in my pocket!"</p>
+                <span data-translate-key="review-2-span">— David S.</span>
+            </div>
+            <div class="review-card">
+                <p data-translate-key="review-3-p">"So easy to use and the recipes are consistently delicious. Highly recommend for any Asian food lover."</p>
+                <span data-translate-key="review-3-span">— Aisha R.</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-section" class="page-section">
+        <h2 data-translate-key="contact-title">Get In Touch</h2>
+        <p data-translate-key="contact-p">Have questions, suggestions, or just want to say hello? We'd love to hear from you!</p>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" id="name" name="name" required>
+                <label for="name" data-translate-key="contact-label-name">Your Name</label>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" required>
+                <label for="email" data-translate-key="contact-label-email">Your Email</label>
+            </div>
+            <div class="form-group">
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <label for="message" data-translate-key="contact-label-message">Your Message</label>
+            </div>
+            <button type="submit" class="generate-button" data-translate-key="contact-button">Send Message</button>
+        </form>
+    </section>
+
+    <div class="custom-scrollbar-track">
+        <div class="custom-scrollbar-thumb"></div>
+    </div>
+
+    <script src="../JS/landing.js"></script>
+</body>
+</html>

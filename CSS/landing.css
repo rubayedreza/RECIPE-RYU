@@ -1,0 +1,583 @@
+/* Hide default browser scrollbar by targeting the root element */
+html {
+    /* Force the html element to be the scroller, but hide its scrollbar */
+    overflow-y: scroll;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-image: radial-gradient(circle at center, #e0e8f0 0%, #d0d8e0 100%);
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar Styles */
+.custom-scrollbar-track {
+    position: fixed;
+    z-index: 1001;
+    top: 50%;
+    right: 15px; /* Position inside the page */
+    height: 50vh; /* Half the viewport height */
+    width: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transform: translateY(-50%);
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Prevent it from blocking clicks */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* This class will be toggled by JavaScript to show the scrollbar */
+body.scrolling .custom-scrollbar-track {
+    opacity: 1;
+}
+
+.custom-scrollbar-thumb {
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(45deg, #8caddb, #6a93cb);
+    border-radius: 4px;
+    transition: height 0.1s ease-out; /* Smooth height changes */
+}
+
+/* --- Rest of your CSS --- */
+
+.background-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18vw;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.03);
+    z-index: 0;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    opacity: 0.1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    position: fixed;
+    width: calc(100% - 80px);
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.header.header-hidden {
+    transform: translateY(-100%);
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2em;
+    font-weight: 760;
+    color: #494848;
+    text-align: center;
+    flex-grow: 1;
+    letter-spacing: 0.08em;
+    margin-left: 100px;
+}
+
+.top-right-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.9em;
+}
+
+/* START: Language Selector Styles */
+.language-selector {
+    position: relative;
+    cursor: pointer;
+}
+
+.selected-language {
+    padding: 5px;
+    border: 1px solid #d0d8e0;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* FIX: Set explicit height and object-fit to prevent distortion */
+.selected-language img {
+    width: 30px;
+    height: 20px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.language-options {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: calc(100% + 10px); /* Position below the button with a gap */
+    right: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 8px;
+    margin: 0;
+    z-index: 101;
+    width: max-content;
+}
+
+/* Arrow pointing up */
+.language-options::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 15px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.language-options.show {
+    display: block; /* Show on toggle */
+}
+
+.language-options li {
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.language-options li:hover {
+    background-color: #f0f4f8;
+}
+
+.language-options li.selected {
+    background-color: #e0e8f0;
+}
+
+/* FIX: Set explicit height and object-fit to prevent distortion */
+.language-options li img {
+    width: 30px;
+    height: 20px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+/* END: Language Selector Styles */
+
+
+.top-right-nav > img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    filter: invert(20%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.top-right-nav > img:hover {
+    transform: scale(1.1);
+    filter: invert(0%);
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+    z-index: 5;
+    padding-top: 100px;
+    min-height: calc(100vh - 80px);
+}
+
+.sidebar {
+    width: 180px;
+    height: 400px;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: fixed;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    z-index: 99;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.sidebar a {
+    color: #555;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    padding: 8px 20px;
+    border-radius: 10px;
+    transition: color 0.3s ease;
+}
+
+.sidebar a::after {
+    content: none;
+}
+
+.sidebar a:hover {
+    color: #2c3e50;
+}
+
+.glass-hover-box {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-out;
+    z-index: 0;
+    opacity: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.dish-description {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 575px;
+    font-size: 0.9em;
+    line-height: 1.7;
+    z-index: 3;
+    font-weight: 300;
+    text-shadow: none;
+    color: #2c3e50;
+    text-align: justify;
+}
+
+.social-links {
+    position: fixed;
+    bottom: 40px;
+    left: 50px;
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.social-links img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    filter: invert(50%) sepia(100%) saturate(2000%) hue-rotate(200deg);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.social-links img:hover {
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg);
+    transform: translateY(-3px);
+}
+
+.scroll-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 100;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.scroll-indicator.scroll-indicator-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.scroll-indicator::before {
+    content: '';
+    width: 2px;
+    height: 8px;
+    background-color: #666;
+    border-radius: 1px;
+    animation: scroll-down 1.8s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+@keyframes scroll-down {
+    0% { transform: translateY(6px); opacity: 0; }
+    50% { transform: translateY(14px); opacity: 1; }
+    100% { transform: translateY(6px); opacity: 0; }
+}
+
+.page-section {
+    padding: 80px 50px;
+    text-align: center;
+    max-width: 1700px;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+    margin-left: 150px;
+    margin-right: auto;
+    width: calc(100% - 220px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-section:first-of-type {
+    margin-top: 100px;
+}
+
+.page-section h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+}
+
+.page-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -15px;
+    width: 80px;
+    height: 2px;
+    background-color: #6a93cb;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.feature-item {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.4em;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.feature-item p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #555;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.review-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: left;
+    font-style: italic;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.review-card p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.review-card span {
+    display: block;
+    text-align: right;
+    font-weight: 700;
+    font-style: normal;
+    color: #2c3e50;
+    margin-top: 10px;
+}
+
+.contact-info p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* --- UPDATED: Contact Form Styles --- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 650px; /* Widened the form */
+    width: 100%;
+    margin: 40px auto 0 auto;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 40px 30px 30px 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; /* Added smooth transition */
+}
+
+/* NEW: Hover effect for the entire form */
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.form-group {
+    position: relative;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    background-color: #f8fbfc;
+    border: 1px solid #d0d8e0;
+    border-radius: 10px;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* NEW: Interactive focus effect for inputs */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #8caddb;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(106, 147, 203, 0.2); /* Soft glow effect */
+}
+
+.form-group label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: #99aab5;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    background: none;
+    padding: 0 4px;
+}
+
+/* Floating label effect */
+.contact-form input:focus + label,
+.contact-form input:valid + label,
+.contact-form textarea:focus + label,
+.contact-form textarea:valid + label {
+    top: -10px;
+    left: 12px;
+    font-size: 0.85em;
+    color: #6a93cb;
+    background-color: #e9eff5; 
+    border-radius: 3px;
+}
+
+.contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contact-form .generate-button {
+    align-self: center;
+    width: auto;
+    padding: 12px 40px;
+    background: linear-gradient(45deg, #8caddb, #6a93cb);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(140, 173, 219, 0.4);
+    margin-top: 10px;
+}
+
+.contact-form .generate-button:hover {
+    background: linear-gradient(45deg, #6a93cb, #8caddb);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(140, 173, 219, 0.6);
+}
+
+/* --- Styles for the new <model-viewer> element --- */
+#kitchenModel {
+    position: absolute;               /* So it scrolls with the page */
+    top: 0;
+    left: 10%;
+    width: 80vw;                     /* Full width of the screen */
+    height: 100%;                     /* Full height of the landing page */
+    z-index: 1;                       /* Behind other content */
+    transform: translateY(-13%);
+    --poster-color: transparent;     /* No loading background */
+    cursor: default !important;
+}
+
