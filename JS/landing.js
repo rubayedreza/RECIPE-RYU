@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+        // REMOVED: Event listener for the favourite icon is no longer needed.
     }
     
     /**
@@ -121,50 +123,34 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePage();
 
     // --- REVISED: Interactive 3D Model Scroll/Zoom Logic ---
-    // This approach is more robust. It waits for the <model-viewer> custom element
-    // to be fully defined and ready before trying to interact with it.
     customElements.whenDefined('model-viewer').then(() => {
         const modelViewer = document.getElementById('kitchenModel');
 
         if (modelViewer) {
-            // A flag to ensure the wheel listener is only added once.
             let wheelListenerAttached = false;
-
-            // The 'load' event fires when the model is loaded and ready for interaction.
             modelViewer.addEventListener('load', () => {
                 if (wheelListenerAttached) {
-                    return; // Don't attach the listener again if the model reloads.
+                    return;
                 }
 
                 modelViewer.addEventListener('wheel', (event) => {
-                    // Get the canvas from the model-viewer's shadow DOM.
                     const canvas = modelViewer.shadowRoot.querySelector('canvas');
                     if (!canvas) return;
                     
                     const rect = canvas.getBoundingClientRect();
-
-                    // Calculate mouse position relative to the canvas.
                     const x = event.clientX - rect.left;
                     const y = event.clientY - rect.top;
-
-                    // Use the model-viewer API to check if the cursor is over the model's geometry.
                     const hit = modelViewer.positionAndNormalFromPoint(x, y);
 
-                    // If 'hit' is null, the cursor is on the background.
                     if (hit === null) {
-                        // Prevent the default zoom behavior.
                         event.preventDefault();
-
-                        // Manually scroll the main page.
                         window.scrollBy({
                             top: event.deltaY,
                             left: 0,
                             behavior: 'auto'
                         });
                     }
-                    // If 'hit' is not null, the cursor is on the model, so we allow
-                    // the default 'camera-controls' to handle the zoom.
-                }, { passive: false }); // 'passive: false' is required for preventDefault().
+                }, { passive: false });
 
                 wheelListenerAttached = true;
             });

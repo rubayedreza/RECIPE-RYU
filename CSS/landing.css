@@ -108,8 +108,25 @@ body.scrolling .custom-scrollbar-track {
 .top-right-nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     font-size: 0.9em;
+}
+
+.favourite-icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.favourite-icon:hover {
+    transform: scale(1.15);
+}
+
+.favourite-icon svg {
+    width: 24px;
+    height: 24px;
 }
 
 /* START: Language Selector Styles */
@@ -128,7 +145,6 @@ body.scrolling .custom-scrollbar-track {
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* FIX: Set explicit height and object-fit to prevent distortion */
 .selected-language img {
     width: 30px;
     height: 20px;
@@ -151,7 +167,6 @@ body.scrolling .custom-scrollbar-track {
     width: max-content;
 }
 
-/* Arrow pointing up */
 .language-options::before {
     content: '';
     position: absolute;
@@ -184,7 +199,6 @@ body.scrolling .custom-scrollbar-track {
     background-color: #e0e8f0;
 }
 
-/* FIX: Set explicit height and object-fit to prevent distortion */
 .language-options li img {
     width: 30px;
     height: 20px;
@@ -192,20 +206,6 @@ body.scrolling .custom-scrollbar-track {
     border-radius: 4px;
 }
 /* END: Language Selector Styles */
-
-
-.top-right-nav > img {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    filter: invert(20%);
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.top-right-nav > img:hover {
-    transform: scale(1.1);
-    filter: invert(0%);
-}
 
 .container {
     display: flex;
@@ -295,24 +295,37 @@ body.scrolling .custom-scrollbar-track {
 
 .social-links {
     position: fixed;
-    bottom: 40px;
-    left: 50px;
+    bottom: 50px;
+    left: 8%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 15px;
+    flex-direction: row;
+    gap: 20px;
     z-index: 100;
 }
 
-.social-links img {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    filter: invert(50%) sepia(100%) saturate(2000%) hue-rotate(200deg);
-    transition: filter 0.3s ease, transform 0.3s ease;
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
-.social-links img:hover {
-    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg);
-    transform: translateY(-3px);
+.social-links a:hover {
+    background-color: #6a93cb;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.social-links svg {
+    width: 20px;
+    height: 20px;
 }
 
 .scroll-indicator {
@@ -466,12 +479,11 @@ body.scrolling .custom-scrollbar-track {
     color: #555;
 }
 
-/* --- UPDATED: Contact Form Styles --- */
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 650px; /* Widened the form */
+    max-width: 650px;
     width: 100%;
     margin: 40px auto 0 auto;
     text-align: left;
@@ -480,10 +492,9 @@ body.scrolling .custom-scrollbar-track {
     padding: 40px 30px 30px 30px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; /* Added smooth transition */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
 }
 
-/* NEW: Hover effect for the entire form */
 .contact-form:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
@@ -507,13 +518,12 @@ body.scrolling .custom-scrollbar-track {
     box-sizing: border-box;
 }
 
-/* NEW: Interactive focus effect for inputs */
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
     border-color: #8caddb;
     background-color: #fff;
-    box-shadow: 0 0 0 4px rgba(106, 147, 203, 0.2); /* Soft glow effect */
+    box-shadow: 0 0 0 4px rgba(106, 147, 203, 0.2);
 }
 
 .form-group label {
@@ -527,7 +537,6 @@ body.scrolling .custom-scrollbar-track {
     padding: 0 4px;
 }
 
-/* Floating label effect */
 .contact-form input:focus + label,
 .contact-form input:valid + label,
 .contact-form textarea:focus + label,
@@ -568,16 +577,14 @@ body.scrolling .custom-scrollbar-track {
     box-shadow: 0 8px 20px rgba(140, 173, 219, 0.6);
 }
 
-/* --- Styles for the new <model-viewer> element --- */
 #kitchenModel {
-    position: absolute;               /* So it scrolls with the page */
+    position: absolute;
     top: 0;
     left: 10%;
-    width: 80vw;                     /* Full width of the screen */
-    height: 100%;                     /* Full height of the landing page */
-    z-index: 1;                       /* Behind other content */
+    width: 80vw;
+    height: 100%;
+    z-index: 1;
     transform: translateY(-13%);
-    --poster-color: transparent;     /* No loading background */
+    --poster-color: transparent;
     cursor: default !important;
 }
-
